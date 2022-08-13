@@ -8,6 +8,9 @@
 		"start": "next start",
 		"lint": "next lint"
 	},
+	"engines": {
+		"node": ">=12.22.0"
+	},
 	"dependencies": {
 		"@heroicons/react": "^1.0.6",
 		"autoprefixer": "^10.4.7",
