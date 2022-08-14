@@ -35,7 +35,7 @@ const BlacklistChecker: FC = () => {
     }
 
 	return (
-		<div className="mt-8 mx-10 md:px-20 px-10 md:py-20 py-10 bg-transparent md:bg-[#e0e0e02d] backdrop-blur-lg overflow-hidden md:shadow md:rounded-2xl grow justify-center">
+		<div className="mt-8 mx-10 md:px-20 px-10 md:py-16 py-10 bg-transparent md:bg-[#e0e0e02d] backdrop-blur-lg overflow-hidden md:shadow md:rounded-2xl grow justify-center">
             {
                 showErrorBox && (
                     <div className={`bg-red-500 mb-6 px-4 py-6 sm:rounded-lg text-slate-50`}>

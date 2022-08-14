@@ -13,7 +13,7 @@ const Home: FC = () => {
 			</div>
 			<div className="absolute top-0 bottom-0 left-0 right-0 h-screen w-screen z-4 flex justify-center items-center">
 				<div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
-					<div className="flex justify-center pt-8 sm:justify-start sm:pt-0">
+					<div className="flex justify-center pt-8 sm:justify-center sm:pt-0">
 						<h1 className="text-5xl text-center px-20 leading-tight font-bold text-white">
 							{APP_NAME}
 						</h1>
