@@ -69,7 +69,7 @@ const BlacklistChecker: FC = () => {
 						placeholder="0x0000000000000000000000000000000000000000"
                         onChange={onChanceAddressInput}
                         value={addressToTest}
-						className="text-sm rounded-lg block w-full p-2.5 bg-gray-300 border-gray-600 placeholder-gray-800 text-white focus:ring-blue-500 focus:border-blue-500"
+						className="text-sm rounded-lg block w-full p-2.5 bg-gray-300 border-gray-600 placeholder-gray-800 text-gray-900 focus:ring-blue-800 focus:border-blue-800"
 					/>
 				</div>
 			)}
