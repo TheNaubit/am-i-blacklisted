@@ -35,17 +35,17 @@ const BlacklistChecker: FC = () => {
     }
 
 	return (
-		<div className="mt-8 mx-10 md:px-20 px-10 md:py-20 py-10 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg grow justify-center">
+		<div className="mt-8 mx-10 md:px-20 px-10 md:py-20 py-10 bg-transparent md:bg-[#e0e0e02d] backdrop-blur-lg overflow-hidden md:shadow md:rounded-2xl grow justify-center">
             {
                 showErrorBox && (
-                    <div className={`bg-red-500 dark:bg-red-500 mb-6 px-4 py-6 sm:rounded-lg text-slate-50`}>
+                    <div className={`bg-red-500 mb-6 px-4 py-6 sm:rounded-lg text-slate-50`}>
                         😥 There was some error, make sure you have MetaMask installed in the browser!
                     </div>
                 )
             }
             {
                 showResultBox && (
-                    <div className={`${data ? "bg-red-500 dark:bg-red-500" : "bg-green-500 dark:bg-green-500"} mb-6 px-4 py-6 sm:rounded-lg text-slate-50`}>
+                    <div className={`${data ? "bg-red-500" : "bg-green-500"} mb-6 px-4 py-6 sm:rounded-lg text-slate-50`}>
                         {
                             data ? `😥 ${debouncedAddressToTest} is banned!` :
                             `🎉 ${debouncedAddressToTest} is not banned!`
@@ -59,7 +59,7 @@ const BlacklistChecker: FC = () => {
 				<div className="">
 					<label
 						htmlFor="default-input"
-						className="block mb-4 text-sm font-medium text-gray-900 dark:text-gray-300"
+						className="block mb-4 text-xl font-medium text-gray-300"
 					>
 						What is the wallet you want to check?
 					</label>
@@ -69,7 +69,7 @@ const BlacklistChecker: FC = () => {
 						placeholder="0x0000000000000000000000000000000000000000"
                         onChange={onChanceAddressInput}
                         value={addressToTest}
-						className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						className="text-sm rounded-lg block w-full p-2.5 bg-gray-300 border-gray-600 placeholder-gray-800 text-white focus:ring-blue-500 focus:border-blue-500"
 					/>
 				</div>
 			)}

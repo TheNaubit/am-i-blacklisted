@@ -3,7 +3,24 @@ module.exports = {
 	content: ['./src/**/*.{js,ts,jsx,tsx}'],
 	darkMode: 'class',
 	theme: {
-		extend: {},
+		extend: {
+			animation: {
+				aurora: "aurora 7s alternate infinite",
+				auroraPlus: "auroraPlus 4s alternate infinite",
+			},
+			keyframes: {
+				aurora: {
+					"100%": {
+						transform: "rotate(1turn) translateX(25vw) translateY(25vh) rotate(-1turn)",
+					}
+				},
+				auroraPlus: {
+					"100%": {
+						transform: "rotate(-1turn) translateX(25vw) translateY(25vh) rotate(1turn)",
+					}
+				}
+			}
+		},
 	},
 	plugins: [],
 }
