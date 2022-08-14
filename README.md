@@ -4,7 +4,7 @@
 This dApp is a very basic dApp I made to practice and learn. It just query the function "isBlacklisted" from the USDC contract in the Ethereum network. Anyone could do the same by checking it on [Etherscan](https://etherscan.io/address/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48#readProxyContract) but.. I just wanted to do it! 🚀
 
 ## Live Demo Link
-TBA
+👉 [https://am-i-blacklisted.pages.dev/](https://am-i-blacklisted.pages.dev/)
 
 ## Getting Started
 

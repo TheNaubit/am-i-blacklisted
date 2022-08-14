@@ -1,8 +1,9 @@
 import { ChangeEventHandler, FC, useEffect, useState } from 'react'
 import { useAccount, useContractRead } from 'wagmi'
 import ConnectWallet from './ConnectWallet'
-import usdcABI from '../lib/abis/usdc-abi.json'
+import usdcABI from '@/lib/abis/usdc-abi.json'
 import { useDebounce } from '@/hooks/useDebounce'
+import { ETHEREUM_CHAIN_ID, USDC_CONTRACT_ADDRESS } from '@/lib/consts'
 
 const BlacklistChecker: FC = () => {
 	const [addressToTest, setAddressToTest] = useState('');
@@ -11,12 +12,11 @@ const BlacklistChecker: FC = () => {
     const debouncedAddressToTest = useDebounce(addressToTest, 500);
 
 	const { data, isError, isLoading } = useContractRead({
-		addressOrName: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+		addressOrName: USDC_CONTRACT_ADDRESS,
 		contractInterface: usdcABI,
 		functionName: 'isBlacklisted',
 		args: debouncedAddressToTest,
-        chainId: 1,
-        enabled: false,
+        chainId: ETHEREUM_CHAIN_ID,
 	})
 
 	useEffect(() => {
