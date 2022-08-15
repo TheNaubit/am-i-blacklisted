@@ -1,45 +1,57 @@
 import { ChangeEventHandler, FC, useEffect, useState } from 'react'
-import { useAccount, useContractRead } from 'wagmi'
-import ConnectWallet from './ConnectWallet'
+import { useContractRead } from 'wagmi'
 import usdcABI from '@/lib/abis/usdc-abi.json'
 import { useDebounce } from '@/hooks/useDebounce'
 import { ETHEREUM_CHAIN_ID, USDC_CONTRACT_ADDRESS } from '@/lib/consts'
+import { validateInputAddressOrENS } from '@/lib/validators'
+import { IAddressOrENSValidationResult } from 'types'
 
 const BlacklistChecker: FC = () => {
 	const [addressToTest, setAddressToTest] = useState('');
     const [showResultBox, setShowResultBox] = useState(false);
     const [showErrorBox, setShowErrorBox] = useState(false);
-    const debouncedAddressToTest = useDebounce(addressToTest, 500);
+    const [analyzedObject, setAnalyzedObject] = useState<IAddressOrENSValidationResult>({success: false})
+    const debouncedAddressToTest = useDebounce(addressToTest, 100);
 
-	const { data, isError, isLoading } = useContractRead({
+	const { data, isLoading, isFetching, isRefetching, refetch } = useContractRead({
 		addressOrName: USDC_CONTRACT_ADDRESS,
 		contractInterface: usdcABI,
 		functionName: 'isBlacklisted',
 		args: debouncedAddressToTest,
         chainId: ETHEREUM_CHAIN_ID,
+        enabled: false
 	})
 
-	useEffect(() => {
-        setShowErrorBox(false);
-        if(data !== undefined) setShowResultBox(true);
-	}, [data])
+    const onChanceAddressInput : ChangeEventHandler<HTMLInputElement> = async (e) => {
+        if(showResultBox) setShowResultBox(false)
+        if(showErrorBox) setShowErrorBox(false)
+
+        setAddressToTest(e.target.value)
+    }
 
     useEffect(() => {
-        if(isError && debouncedAddressToTest) setShowErrorBox(true);
-    }, [debouncedAddressToTest, isError])
+        validateInputAddressOrENS(debouncedAddressToTest)
+        .then(validatedResult => {
+            if(validatedResult.success) {
+                setAnalyzedObject(validatedResult)
+                refetch().then(() => setShowResultBox(true))
+            }else{
+                setShowErrorBox(true)
+            }
+        })
+        .catch(err => {
+            // Error validating!
+        })
+    }, [debouncedAddressToTest])
 
-    const onChanceAddressInput : ChangeEventHandler<HTMLInputElement> = (e) => {
-        if(showResultBox) setShowResultBox(false);
-        if(showErrorBox) setShowErrorBox(false);
-        setAddressToTest(e.target.value);
-    }
+    
 
 	return (
 		<div className="mt-8 mx-10 md:px-20 px-10 md:py-16 py-10 bg-transparent md:bg-[#e0e0e02d] backdrop-blur-lg overflow-hidden md:shadow md:rounded-2xl grow justify-center">
             {
-                showErrorBox && (
+                showErrorBox && debouncedAddressToTest && (
                     <div className={`bg-red-500 mb-6 px-4 py-6 sm:rounded-lg text-slate-50`}>
-                        😥 There was some error, make sure you have MetaMask installed in the browser!
+                        😥 {debouncedAddressToTest} is not a valid address or ENS!
                     </div>
                 )
             }
@@ -47,13 +59,13 @@ const BlacklistChecker: FC = () => {
                 showResultBox && (
                     <div className={`${data ? "bg-red-500" : "bg-green-500"} mb-6 px-4 py-6 sm:rounded-lg text-slate-50`}>
                         {
-                            data ? `😥 ${debouncedAddressToTest} is banned!` :
-                            `🎉 ${debouncedAddressToTest} is not banned!`
+                            data ? `😥 ${analyzedObject.address} ${analyzedObject.ens ? `(${analyzedObject.ens})` : ''} is banned!` :
+                            `🎉 ${analyzedObject.address} ${analyzedObject.ens ? `(${analyzedObject.ens})` : ''} is not banned!`
                         }
                     </div>
                 )
             }
-			{isLoading ? (
+			{isLoading || isFetching || isRefetching ? (
 				<>Loading...</>
 			) : (
 				<div className="">

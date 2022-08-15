@@ -11,12 +11,12 @@ module.exports = {
 			keyframes: {
 				aurora: {
 					"100%": {
-						transform: "rotate(1turn) translateX(25vw) translateY(25vh) rotate(-1turn)",
+						transform: "rotate(1turn) translateX(50vw) translateY(50vh) rotate(-1turn)",
 					}
 				},
 				auroraPlus: {
 					"100%": {
-						transform: "rotate(-1turn) translateX(25vw) translateY(25vh) rotate(1turn)",
+						transform: "rotate(-1turn) translateX(50vw) translateY(50vh) rotate(1turn)",
 					}
 				}
 			}

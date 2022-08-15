@@ -3,6 +3,8 @@
 
 This dApp is a very basic dApp I made to practice and learn. It just query the function "isBlacklisted" from the USDC contract in the Ethereum network. Anyone could do the same by checking it on [Etherscan](https://etherscan.io/address/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48#readProxyContract) but.. I just wanted to do it! 🚀
 
+In this new update, it also supports ENS addresses, so you can check if any address or ENS address is blacklisted inside the USDC contract. 🎉 (or 😥 if you happen to be banned there)
+
 ## Live Demo Link
 👉 [https://amiblacklisted.nauverse.com/](https://amiblacklisted.nauverse.com/)
 
