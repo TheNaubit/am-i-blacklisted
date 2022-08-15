@@ -42,7 +42,7 @@ const BlacklistChecker: FC = () => {
         .catch(err => {
             // Error validating!
         })
-    }, [debouncedAddressToTest])
+    }, [debouncedAddressToTest, refetch])
 
     
 
